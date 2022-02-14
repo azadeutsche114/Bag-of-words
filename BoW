@@ -1,0 +1,60 @@
+model = Tokenizer()
+model.fit_on_texts(text)
+rep = model.texts_to_matrix(text, mode='count')
+print(rep)
+print(f'Key : {list(model.word_index.keys())}')
+Key : ['man', 'the', 'a', 'dog', 'there', 'was', 'had', 'and', 'walked']
+from keras.preprocessing.text import Tokenizer
+ 
+text = [
+  'There was a man',
+  'The man had a dog',
+  'The dog and the man walked',
+]
+# using tokenizer 
+model = Tokenizer()
+model.fit_on_texts(text)
+ 
+#print keys 
+print(f'Key : {list(model.word_index.keys())}')
+ 
+#create bag of words representation 
+rep = model.texts_to_matrix(text, mode='count')
+print(rep)
+
+
+Import pandas as pd
+reviews = pd.read_excel('reviews.xlsx')
+reviews.head()
+reviews.shape
+import nltk
+import re
+from nltk.corpus import stopwords
+### Data preprocessing
+from nltk.stem.porter import PorterStemmer
+ps = PorterStemmer()
+corpus = []
+for i in range(0, len(reviews)):
+  print(i)
+  title = re.sub('[^a-zA-Z]', ' ', reviews['Reviews'][i])
+  title = title.lower()
+  title = title.split()
+  
+  title = [ps.stem(word) for word in title if not word in stopwords.words('english')]
+  title = ''.join(title)
+  corpus.append(title)
+  
+  
+  from sklearn.feature_extraction.text CountVectorizer
+  
+  #Creating bag of words
+  
+  bow_article = CountVectorizer().fit(corpus)
+  
+  count_tokens = bow_article.get_feature_names()
+  
+  article_vect = bow_article.transform(corpus)
+  count_tokens
+  
+  df_count_vect = pd.DataFrame(data = article_vect.toarray(), columns=columns=count_tokens)
+  df_count_vect
