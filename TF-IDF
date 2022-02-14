@@ -1,0 +1,89 @@
+names = re.findall(‘><A HREF=”(.*)”>’, text)
+titles = re.findall(‘<BR><TD> (.*)\n’, text)
+
+dataset = []
+for i in folders:
+    file = open(i+"/index.html", 'r')
+    text = file.read().strip()
+    file.close()
+    file_name = re.findall('><A HREF="(.*)">', text)
+    file_title = re.findall('<BR><TD> (.*)\n', text)
+    
+    for j in range(len(file_name)):
+        dataset.append((str(i) + str(file_name[j]), file_title[j]))
+        
+        if c == False:
+    file_name = file_name[2:]
+    c = True
+
+np.char.lower(data)
+
+new_text = ""
+for word in words:
+    if word not in stop_words:
+        new_text = new_text + " " + word
+        
+symbols = "!\"#$%&()*+-./:;<=>?@[\]^_`{|}~\n"
+for i in symbols:
+    data = np.char.replace(data, i, ' ')
+
+return np.char.replace(data, "'", "")
+
+new_text = ""
+for w in words:
+    if len(w) > 1:
+       new_text = new_text + " " + w
+
+def preprocess(data):
+    data = convert_lower_case(data)
+    data = remove_punctuation(data)
+    data = remove_apostrophe(data)
+    data = remove_single_characters(data)
+    data = convert_numbers(data)
+    data = remove_stop_words(data)
+    data = stemming(data)
+    data = remove_punctuation(data)
+    data = convert_numbers(data)
+
+DF = {}
+for i in range(len(processed_text)):
+    tokens = processed_text[i]
+    for w in tokens:
+        try:
+            DF[w].add(i)
+        except:
+            DF[w] = {i}
+
+tf_idf = {}
+for i in range(N):
+    tokens = processed_text[i]
+    counter = Counter(tokens + processed_title[i])
+    for token in np.unique(tokens):
+        tf = counter[token]/words_count
+        df = doc_freq(token)
+        idf = np.log(N/(df+1))
+        tf_idf[doc, token] = tf*idf
+        
+        
+def matching_score(query):
+    query_weights = {}
+    for key in tf_idf: 
+        if key[1] in tokens:
+            query_weights[key[0]] += tf_idf[key]
+            
+        
+# Document Vectorization
+D = np.zeros((N, total_vocab_size))
+for i in tf_idf:
+    ind = total_vocab.index(i[1])
+    D[i[0]][ind] = tf_idf[i]
+    
+
+Q = np.zeros((len(total_vocab)))
+counter = Counter(tokens)
+words_count = len(tokens)
+query_weights = {}
+for token in np.unique(tokens):
+    tf = counter[token]/words_count
+    df = doc_freq(token)
+    idf = math.log((N+1)/(df+1))
